@@ -111,19 +111,19 @@ def percentChangeList(list):
         previous = current
     return returnList
 
-#data frames for seaborn use
-dataFrame = pd.DataFrame({"Language Total": total,
-                          "Language English": totalEng,
-                          "Language Spanish": totalSpan,
-                          "Income Mean Total": meanTotal,
-                          "Income Mean English": meanEng,
-                          "Income Mean Spanish": meanSpan,
-                          "Language % Change Total": percentChangeList(total),
-                          "Language % Change English": percentChangeList(totalEng),
-                          "Language % Change Spanish": percentChangeList(totalSpan),
-                          "Income Mean % Change Total": percentChangeList(meanTotal),
-                          "Income Mean % Change English": percentChangeList(meanEng),
-                          "Income Mean % Change Spanish": percentChangeList(meanSpan)
+#data frames for seaborn use (pd.Series is not neccessary but just in case its there)
+dataFrame = pd.DataFrame({"Language Total": pd.Series(total,index=sYears),
+                          "Language English": pd.Series(totalEng,index=sYears),
+                          "Language Spanish": pd.Series(totalSpan,index=sYears),
+                          "Income Mean Total": pd.Series(meanTotal,index=sYears),
+                          "Income Mean English": pd.Series(meanEng,index=sYears),
+                          "Income Mean Spanish": pd.Series(meanSpan,index=sYears),
+                          "Language % Change Total": pd.Series(percentChangeList(total),index=sYears),
+                          "Language % Change English": pd.Series(percentChangeList(totalEng),index=sYears),
+                          "Language % Change Spanish": pd.Series(percentChangeList(totalSpan),index=sYears),
+                          "Income Mean % Change Total": pd.Series(percentChangeList(meanTotal),index=sYears),
+                          "Income Mean % Change English": pd.Series(percentChangeList(meanEng),index=sYears),
+                          "Income Mean % Change Spanish": pd.Series(percentChangeList(meanSpan),index=sYears)
                           })
 
 sns.set(style="darkgrid", color_codes=True) #make it look nice
