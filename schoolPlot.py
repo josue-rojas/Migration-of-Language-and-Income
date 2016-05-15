@@ -9,7 +9,7 @@ import pandas as pd
 import math
 import csv
 
-
+sns.set(style="darkgrid", color_codes=True) #make it look nice
 
 """
 for this part of the project data has to be manipulated in many ways
@@ -28,6 +28,10 @@ for year in years:
     data["nEngLearn" + year] = []
     data["Poverty" + year] = []
     data["nPoverty" + year] = []
+    data["EngLearn#" + year] = []
+    data["nEngLearn#" + year] = []
+    data["Poverty#" + year] = []
+    data["nPoverty#" + year] = []
 #list for means for all districts
 meanTot = []
 meanEng = []
@@ -50,13 +54,11 @@ with open('school/district.csv') as file:
                 data["nEngLearn" + year].append(100- float(row[' English Language Learners']))
                 data["Poverty" + year].append(float(row[' Poverty']))
                 data["nPoverty" + year].append(100- float(row[' Poverty']))
-                """
-                data["TotalEnroll" + year].append(int(row['Total Enrollment']))
-                data["EngLearn" + year].append(int(row['# English Language Learners']))
-                data["nEngLearn" + year].append(int(row['Total Enrollment']) - int(row['# English Language Learners']))
-                data["Poverty" + year].append(int(row['# Poverty']))
-                data["nPoverty" + year].append(int(row['Total Enrollment']) - int(row['# Poverty']))
-                """
+                data["EngLearn#" + year].append(int(row['# English Language Learners']))
+                data["nEngLearn#" + year].append(int(row['Total Enrollment']) - int(row['# English Language Learners']))
+                data["Poverty#" + year].append(int(row['# Poverty']))
+                data["nPoverty#" + year].append(int(row['Total Enrollment']) - int(row['# Poverty']))
+            
 #got this part of the code from - http://stackoverflow.com/questions/20792445/calculate-rgb-value-for-a-range-of-values-to-create-heat-map
 def floatRgb(mag, cmin, cmax,color):
     try:
@@ -92,7 +94,7 @@ def floatRgb(mag, cmin, cmax,color):
     return (red, green, blue)
 
 #quick function to plot maps in same grap
-def plotMap(list,plot,color,title):
+def plotMap(list,plot,color,title,fig):
     #nyc locations
     lllat = 40.4712
     lllon = -74.3018
@@ -112,16 +114,52 @@ def plotMap(list,plot,color,title):
                 s.append(Polygon(np.array(shape), True))
                 dist = ax.add_collection(PatchCollection( s, facecolor= c, edgecolor='k', linewidths=1., zorder=2))
  #               ax.colorbar(map)
- 
-#mapping 5 graphs in a look 
-figNum = 1
-for year in years:
-    fig = plt.figure(figNum)
-    plt.suptitle(year+ " NYC School District Change Poverty and English Learners")
-    plotMap(data["TotalEnroll"+year],231,0,"Total Enroll "+year)
-    plotMap(data["EngLearn" + year],232,3,"Eng Learner % " + year)
-    plotMap(data["nEngLearn" + year],233,3,"non Eng Learn % " + year)
-    plotMap(data["Poverty" + year],234,4,"Poverty % " + year)
-    plotMap(data["nPoverty" + year],235,4,"non Poverty % " + year)
-    plt.show()
-    figNum = figNum+1
+def mapPlots():
+#mapping 5 graphs for each year 
+    figNum = 1
+    for year in years:
+        fig = plt.figure(figNum)
+        name = year+ " NYC School District Change Poverty and English Learners"
+        plt.suptitle(year+ " NYC School District Change Poverty and English Learners")
+        plotMap(data["TotalEnroll"+year],231,0,"Total Enroll "+year,fig)
+        plotMap(data["EngLearn" + year],232,3,"Eng Learner % " + year,fig)
+        plotMap(data["nEngLearn" + year],233,3,"non Eng Learn % " + year,fig)
+        plotMap(data["Poverty" + year],235,4,"Poverty % " + year,fig)
+        plotMap(data["nPoverty" + year],236,4,"non Poverty % " + year,fig)
+        ax      = fig.add_subplot(234)
+        ax.text(0, 6, r'The darker the color the higer the number!', fontsize=8)
+        ax.xaxis.set_ticklabels([])
+        ax.yaxis.set_ticklabels([])
+        ax.axis([0, 10, 0, 10])
+        plt.savefig(name,dpi=200) #save them instead of showing cause its a lot
+
+ #plt.show()
+        figNum = figNum+1
+        
+def lrPlots():
+#plotting linear regression plots
+#beware this makes a lot of graphs
+    figu = 1
+    for year in years:
+        names = ["Total Enroll " + year,"English Learners " + year,"non English Learners " + year,"Poverty " + year,"non Poverty " + year]
+        dataFrame = pd.DataFrame({names[0]: pd.Series(data["TotalEnroll" + year]),
+                                  names[1]: pd.Series(data["EngLearn#" + year]),
+                                  names[2]: pd.Series(data["nEngLearn#" + year]),
+                                  names[3]: pd.Series(data["Poverty#" + year]),
+                                  names[4]: pd.Series(data["nPoverty#" + year])
+                                  })
+        for name in names:
+            for n in names:
+                if(name != n):
+                    plt.figure(figu)
+                    plt.suptitle(name + " vs " + n) 
+                    sns.regplot(x=name, y=n, data=dataFrame,color="b")
+                    plt.savefig(name + " vs " + n,dpi=200) #save them instead of showing cause its a lot
+                    figu+=1
+                                  
+    
+def main():
+    lrPlots()
+    mapPlots()
+main()
+    
