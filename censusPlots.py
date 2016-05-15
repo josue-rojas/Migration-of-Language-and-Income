@@ -5,11 +5,7 @@ import re #force to use this since the data is not uniform
 import seaborn as sns
 import pandas as pd #used for the dataframe
 
-#new york location for upper and lower corners for basemap
-#lllat = 40.4712
-#lllon = -74.3018
-#urlat = 40.9331
-#urlot = -73.7026
+
 """
 Everything is commented out becuase to avoid time consumption
 I took the total of people in the census in ny, speaking spanish, and speaking english
@@ -203,51 +199,3 @@ sns.regplot(x="Language % Change Spanish", y="Income Mean % Change Spanish", dat
 plt.subplot(223)
 sns.regplot(x="Language % Change English", y="Income Mean % Change Spanish", data=dataFrame,color="r")
 plt.show()
-
-
-
-"""
-#scrapp stuff left here for thought process (makes it messy but its ok since it is ignore)
-#plotting the data
-#need to find percentage change
-#need to find 
-#all three graphs together
-plt.figure(1)
-plt.subplot(221)
-plt.plot(length)
-plt.plot(slength)
-plt.plot(elength)
-plt.xticks(xAxis, sYears)
-
-
-#just spanish
-#plt.figure(2)
-plt.subplot(222)
-plt.plot(slength)
-
-#just english
-#plt.figure(3)
-plt.subplot(223)
-plt.plot(elength)
-
-#english and spanish and it's regression line
-#plt.figure(4)
-plt.subplot(224)
-plt.plot(elength)
-plt.plot(slength)
-#fig, ax1 = plt.subplots()
-#ax1.barh(years,length,alpha=0.4)
-#plt.barh(years,elength,alpha=0.4,align='center')
-#plt.barh(years,slength,alpha=0.4,align='center')
-#plt.xticks(years, sYears)
-#plt.xticks(x, labels, rotation='vertical')
-#ax1.hist(length,10)
-#ax1.plot(, data["HHLSpanish14"])
-#ax2 = ax1.twinx()
-#ax2.plot(years, data["FINCPSpanish14"])
-#plt.plot(years,length)
-#plt.plot(years,slength)
-#plt.plot(years, elength)
-#plt.hist(data["HHL5"], facecolor='green', alpha=0.5)
-plt.show()
-"""
