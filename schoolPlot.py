@@ -127,7 +127,7 @@ def mapPlots():
         plotMap(data["Poverty" + year],235,4,"Poverty % " + year,fig)
         plotMap(data["nPoverty" + year],236,4,"non Poverty % " + year,fig)
         ax      = fig.add_subplot(234)
-        ax.text(0, 6, r'The darker the color the higer the number!', fontsize=8)
+        ax.text(0, 6, r'The darker the color the higher the number!', fontsize=8)
         ax.xaxis.set_ticklabels([])
         ax.yaxis.set_ticklabels([])
         ax.axis([0, 10, 0, 10])
