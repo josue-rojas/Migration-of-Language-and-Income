@@ -10,7 +10,7 @@
 </span></div>
 </div>
 </font></div>
-<div style="text-align:center;display:block"><font size="1">by Josue Rojas</font></div>
+<div style="text-align:center;display:block"><font size="1">by Josue Rojas (may 2016)</font></div>
 <div style="text-align:center;display:block"><font size="1">Github -&nbsp;<a href="https://goo.gl/QrgTbd" target="_blank">https://goo.gl/QrgTbd</a></font></div>
 <div style="text-align:center;display:block"><br>
 </div>
