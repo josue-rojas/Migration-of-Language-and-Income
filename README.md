@@ -4,14 +4,14 @@
 <div><span style="background-color:transparent">
 <div><span style="background-color:transparent">
 <div><span style="background-color:transparent">
-#Migration of Language and Income in NY
+# Migration of Language and Income in NY
 </span></div>
 </span></div>
 </span></div>
 </div>
 </font></div>
 <div style="text-align:center;display:block"><font size="1">by Josue Rojas (may 2016)</font></div>
-<div style="text-align:center;display:block"><font size="1">Github -&nbsp;<a href="https://goo.gl/QrgTbd" target="_blank">https://goo.gl/QrgTbd</a></font></div>
+<div style="text-align:center;display:block"><font size="1">Site -&nbsp;<a href="https://sites.google.com/site/josuerojasportfolio/python/migration-of-language-and-income" target="_blank">Google Site</a></font></div>
 <div style="text-align:center;display:block"><br>
 </div>
 <div style="text-align:center;display:block"><br>
